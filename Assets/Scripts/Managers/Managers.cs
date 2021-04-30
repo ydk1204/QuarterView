@@ -9,10 +9,11 @@ public class Managers : MonoBehaviour
 
     InputManager _input = new InputManager();
     ResourcesManager _resource = new ResourcesManager();
+    UIManager ui = new UIManager();
     public static InputManager Input { get { return Instance._input; } }
     public static ResourcesManager Resource { get { return Instance._resource; } }
+    public static UIManager UI { get { return Instance.ui; } }
 
-    // Start is called before the first frame update
     void Start()
     {
         Init();
