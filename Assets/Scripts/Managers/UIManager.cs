@@ -53,6 +53,7 @@ public class UIManager
         return Util.GetOrAddComponent<T>(go);
     }
 
+
     public T ShowSceneUI<T>(string name = null) where T : UI_Scene
     {
         if (string.IsNullOrEmpty(name))
@@ -112,5 +113,11 @@ public class UIManager
         {
             ClosePopupUI();
         }
+    }
+
+    public void Clear()
+    {
+        CloseAllPopupUI();
+        _sceneUI = null;
     }
 }
