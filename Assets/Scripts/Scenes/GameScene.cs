@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameScene : BaseScene
 {
+    //Coroutine co;
+
     protected override void Init()
     {
         base.Init();
@@ -12,12 +14,10 @@ public class GameScene : BaseScene
 
         Managers.UI.ShowSceneUI<UI_Inven>();
 
-        for (int i = 0; i < 5; i++)
-        {
-            Managers.Resource.Instantiate("Unitychan");
-        }
-    }
+        Dictionary<int, Data.Stat> dict =  Managers.Data.StatDict;
 
+        gameObject.GetOrAddComponent<CursorController>();
+    }
     public override void Clear()
     {
 
