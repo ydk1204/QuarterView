@@ -18,7 +18,7 @@ public class Stat : MonoBehaviour
     protected float _movespeed;
 
     public int Level { get { return _level; } set { _level = value; } }
-    public int hp { get { return _hp; } set { _hp = value; } }
+    public int Hp { get { return _hp; } set { _hp = value; } }
     public int MaxHp { get { return _maxHp; } set { _maxHp = value; } }
     public int Attack { get { return _attack; } set { _attack = value; } }
     public int Defense { get { return _defense; } set { _defense = value; } }
@@ -32,6 +32,29 @@ public class Stat : MonoBehaviour
         _attack = 10;
         _defense = 5;
         _movespeed = 10.0f;
+    }
+
+    public virtual void OnAttacked(Stat attacker)
+    {
+        int damage = Mathf.Max(0, attacker.Attack - Defense);
+        Hp -= damage;
+        if (Hp <= 0)
+        {
+            Hp = 0;
+            OnDead(attacker);
+        }
+    }
+
+    protected virtual void OnDead(Stat attacker)
+    {
+        PlayerStat playerStat = attacker as PlayerStat;
+        //Define.WorldObject type = Managers.Game.GetWorldObjectType(attacker.gameObject);
+        if (playerStat != null)
+        {
+            playerStat.Exp += 100;
+        }
+          
+        Managers.Game.Despawn(gameObject);
     }
 
 }

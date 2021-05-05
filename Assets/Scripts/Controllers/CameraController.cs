@@ -12,6 +12,8 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     public GameObject _player = null;
+
+    public void SetPlayer(GameObject player) { _player = player; }
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +25,13 @@ public class CameraController : MonoBehaviour
     {
         if (_mode == Define.CameraMode.QuaterView)
         {
+            if(_player.IsValid() == false)
+            {
+                return;
+            }
+
             RaycastHit hit;
-            if (Physics.Raycast(_player.transform.position, _delta, out hit, _delta.magnitude, LayerMask.GetMask("Wall")))
+            if (Physics.Raycast(_player.transform.position, _delta, out hit, _delta.magnitude, 1 << (int)Define.Layer.Block))
             {
                 float dist = (hit.point - _player.transform.position).magnitude * 0.8f;
                 transform.position = _player.transform.position + _delta.normalized * dist;

@@ -9,11 +9,6 @@ public class UI_Inven : UI_Scene
         GridPanel
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Init();
-    }
 
     public override void Init()
     {
